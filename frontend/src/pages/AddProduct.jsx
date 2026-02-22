@@ -135,7 +135,7 @@ export default function AddProduct() {
           className="bg-primary text-white px-4 py-2 rounded"
         >
           Upload Product
-          {loading ? "Uploading..." : "Upload Product"}
+          {/* {loading ? "Uploading..." : "Upload Product"} */}
         </button>
 
       </div>
