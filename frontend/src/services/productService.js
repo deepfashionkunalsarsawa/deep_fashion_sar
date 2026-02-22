@@ -21,7 +21,7 @@ export const getProducts = async () => {
     .from("products")
     .select(`
       *,
-      images:product_image(*)
+      images:product_images(*)
     `);
 
   if (error) {
@@ -37,7 +37,7 @@ export const getProductById = async (id) => {
     .from("products")
     .select(`
       *,
-      images:product_image(*)
+      images:product_images(*)
     `)
     .eq("id", id)
     .single();
