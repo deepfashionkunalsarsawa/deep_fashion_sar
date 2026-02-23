@@ -46,9 +46,10 @@ export default function Home() {
 
   return (
     <div>
+      <Categories navigate={navigate} />
       <Hero navigate={navigate} />
       <LatestArrivals products={featuredProducts} />
-      <Categories navigate={navigate} />
+      
       <WeddingBanner/>
       <StoreLocation/>
       
@@ -59,7 +60,7 @@ export default function Home() {
 function Hero({ navigate }) {
   return (
     <section
-      className="relative h-[90vh] md:h-[85vh] flex items-center"
+      className="relative h-[70vh] md:h-[45vh] flex items-center"
       style={{
         backgroundImage: "url('/bg.png')",
         backgroundSize: "cover",
@@ -91,14 +92,14 @@ function Hero({ navigate }) {
 
               <button
                 onClick={() => navigate("/products")}
-                className="w-full md:w-auto py-3 px-6 rounded-full bg-white text-black font-medium hover:opacity-90 transition"
+                className="w-auto md:w-auto py-3 px-6 rounded-full bg-white text-black font-medium hover:opacity-90 transition"
               >
                 Explore Collection
               </button>
 
               <button
                 onClick={() => navigate("/products?category=Lehenga")}
-                className="w-full md:w-auto py-3 px-6 rounded-full bg-[#8B1E2D] text-white hover:opacity-90 transition"
+                className="w-auto md:w-auto py-3 px-6 rounded-full bg-[#8B1E2D] text-white hover:opacity-90 transition"
               >
                 Wedding Collection
               </button>
@@ -112,26 +113,71 @@ function Hero({ navigate }) {
   );
 }
 
+// function Categories({ navigate }) {
+//   const categories = [
+//     { name: "Sarees", image: "/categories/Sarees.jpg" },
+//     { name: "Designer Suits", image: "/categories/Designer Suits.jpg" },
+//     { name: "Unstiched Suits", image: "/categories/Unstiched Suits.jpg" },
+//     { name: "Lehenga", image: "/categories/Lehenga.jpg" },
+//     { name: "Party Wear", image: "/categories/Party Wear.jpg" },
+//     { name: "New Arrivals", image: "/categories/New Arrivals.jpg" },
+//   ];
+
+//   return (
+//     <section className="py-1 bg-white ">
+//       <Container>
+
+//         {/* <h2 className="text-2xl font-serif text-center text-[#8B1E2D] mb-10">
+//           SHOP BY CATEGORY
+//         </h2> */}
+
+//         {/* Mobile Scroll */}
+//         <div className="flex md:grid md:grid-cols-3 gap-2 overflow-x-auto md:overflow-visible pb-4 no-scrollbar ">
+
+//           {categories.map((cat, index) => (
+//             <div
+//               key={index}
+//               onClick={() =>
+//                 navigate(`/products?category=${encodeURIComponent(cat.name)}`)
+//               }
+//               className="min-w-[75px] md:min-w-0 text-center cursor-pointer group"
+//             >
+//               <div className="w-16 h-16 rounded-full border-2 overflow-hidden bg-white shadow-sm         border-[#C4A24B] shadow-md group-hover:scale-105 transition duration-300">
+//                 <img
+//                   src={cat.image}
+//                   alt={cat.name}
+//                   className="w-full h-full object-cover"
+//                 />
+//               </div>
+
+//               <p className="mt-3 text-sm md:text-base font-medium text-[#3E2C1C] whitespace-nowrap ">
+//                 {cat.name}
+//               </p>
+//             </div>
+//           ))}
+
+//         </div>
+
+//       </Container>
+//     </section>
+//   );
+// }
 function Categories({ navigate }) {
   const categories = [
     { name: "Sarees", image: "/categories/Sarees.jpg" },
     { name: "Designer Suits", image: "/categories/Designer Suits.jpg" },
-    { name: "Unstiched Suits", image: "/categories/Unstiched Suits.jpg" },
+    { name: "Unstitched Suits", image: "/categories/Unstiched Suits.jpg" },
     { name: "Lehenga", image: "/categories/Lehenga.jpg" },
     { name: "Party Wear", image: "/categories/Party Wear.jpg" },
     { name: "New Arrivals", image: "/categories/New Arrivals.jpg" },
   ];
 
   return (
-    <section className="py-14 bg-white">
+    <section className="py-4 bg-white">
       <Container>
 
-        <h2 className="text-3xl font-serif text-center text-[#8B1E2D] mb-10">
-          Shop by Category
-        </h2>
-
-        {/* Mobile Scroll */}
-        <div className="flex md:grid md:grid-cols-3 gap-8 overflow-x-auto md:overflow-visible pb-4 no-scrollbar">
+        {/* Mobile Scroll + Desktop Grid */}
+        <div className="flex md:grid md:grid-cols-6 gap-3 overflow-x-auto md:overflow-visible no-scrollbar px-1">
 
           {categories.map((cat, index) => (
             <div
@@ -139,9 +185,10 @@ function Categories({ navigate }) {
               onClick={() =>
                 navigate(`/products?category=${encodeURIComponent(cat.name)}`)
               }
-              className="min-w-[120px] md:min-w-0 text-center cursor-pointer group"
+              className="min-w-[90px] md:min-w-0 text-center cursor-pointer group flex-shrink-0"
             >
-              <div className="w-28 h-28 md:w-32 md:h-32 mx-auto rounded-full overflow-hidden border-4 border-[#C4A24B] shadow-md group-hover:scale-105 transition duration-300">
+              {/* Circle Image */}
+              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-[#C4A24B] overflow-hidden bg-white shadow-md group-hover:scale-105 transition duration-300 mx-auto">
                 <img
                   src={cat.image}
                   alt={cat.name}
@@ -149,7 +196,8 @@ function Categories({ navigate }) {
                 />
               </div>
 
-              <p className="mt-3 text-sm md:text-base font-medium text-[#3E2C1C]">
+              {/* Category Name */}
+              <p className="mt-2 text-xs md:text-sm font-medium text-[#3E2C1C] whitespace-nowrap">
                 {cat.name}
               </p>
             </div>
@@ -161,6 +209,7 @@ function Categories({ navigate }) {
     </section>
   );
 }
+
 
 function WeddingBanner() {
   const whatsappNumber = "919557201975";
@@ -357,7 +406,8 @@ function LatestArrivals({ products }) {
           {products.map((product) => (
             <div
               key={product.id}
-              className="min-w-[180px] bg-white rounded-xl shadow-sm p-3"
+              className="min-w-[180px] bg-white rounded-xl shadow-sm p-3 cursor-pointer hover:shadow-lg transition"
+              onClick={() => navigate(`/product/${product.id}`)}
             >
               <img
                 src={product.images?.[0]?.image_url}
