@@ -30,7 +30,7 @@ export default function Products() {
     const validCategories = [
       "Sarees",
       "Designer Suits",
-      "Kurtis",
+      "Unstiched Suits",
       "Lehenga",
       "Party Wear",
       "New Arrivals",
@@ -122,7 +122,7 @@ export default function Products() {
 
         {/* CATEGORY SLIDER */}
         <div className="flex gap-4 overflow-x-auto pb-5 no-scrollbar">
-          {["Sarees", "Lehenga", "Designer Suits", "Party Wear", "Unstictched Suits"].map((cat) => (
+          {["Sarees", "Lehenga", "Designer Suits", "Party Wear", "Unstiched Suits"].map((cat) => (
             <div
               key={cat}
               onClick={() =>
@@ -178,36 +178,90 @@ export default function Products() {
         </div>
 
         {/* PRODUCTS GRID */}
-        <div className="grid grid-cols-2 gap-5">
+        
+        <div className="
+          grid 
+          grid-cols-2 
+          md:grid-cols-2 
+          lg:grid-cols-3 
+          xl:grid-cols-4 
+          gap-5 
+          lg:gap-8
+        ">
           {filteredProducts.map((product) => (
             <div
               key={product.id}
               onClick={() => navigate(`/product/${product.id}`)}
-              className="bg-white rounded-2xl shadow-md p-4 cursor-pointer hover:shadow-lg transition"
+              className="
+                bg-white 
+                rounded-2xl 
+                shadow-md 
+                p-4 
+                cursor-pointer 
+                transition 
+                hover:shadow-xl 
+                hover:-translate-y-1
+              "
             >
               <div className="rounded-xl overflow-hidden bg-[#EFE9DD]">
                 <img
                   src={product.images?.[0]?.image_url}
                   alt={product.name}
-                  className="w-full h-[250px] object-cover rounded-xl"
+                  className="
+                    w-full 
+                    h-[220px] 
+                    md:h-[250px] 
+                    lg:h-[280px] 
+                    object-cover 
+                    rounded-xl
+                  "
                 />
               </div>
 
-              <div className="mt-3">
-                <h3 className="text-sm font-medium text-[#3E2C1C]">
+              <div className="mt-4">
+                <h3 className="text-sm md:text-base font-medium text-[#3E2C1C]">
                   {product.name}
                 </h3>
 
-                <p className="mt-1 font-semibold text-[#3E2C1C]">
+
+                <div className="mt-2">
+                  <div className="flex items-center gap-3">
+                    <span className="text-lg font-semibold text-[#3E2C1C]">
+                      ₹{product.price}
+                    </span>
+
+                    <span className="text-gray-400 line-through text-sm">
+                      ₹{product.price + 400}
+                    </span>
+                  </div>
+
+                  <p className="text-green-600 text-sm font-medium mt-1">
+                    Save ₹400
+                  </p>
+                </div>
+
+
+                {/* <p className="mt-1 font-semibold text-[#3E2C1C] text-sm md:text-base">
                   ₹{product.price}
-                </p>
+                </p> */}
 
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     navigate(`/product/${product.id}`);
                   }}
-                  className="mt-3 w-full bg-[#C49A2C] text-white py-2 rounded-full text-sm"
+                  className="
+                    mt-4 
+                    w-full 
+                    bg-[#C49A2C] 
+                    text-white 
+                    py-2.5 
+                    rounded-full 
+                    text-sm 
+                    md:text-base
+                    hover:opacity-90 
+                    transition
+                  "
                 >
                   View Details
                 </button>
@@ -215,6 +269,8 @@ export default function Products() {
             </div>
           ))}
         </div>
+
+
 
       </Container>
     </section>

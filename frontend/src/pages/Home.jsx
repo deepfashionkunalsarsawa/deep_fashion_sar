@@ -60,46 +60,59 @@ export default function Home() {
 function Hero({ navigate }) {
   return (
     <section
-      className="relative h-[70vh] md:h-[45vh] flex items-center"
+      className="relative h-[45vh] md:h-[90vh] lg:h-[100vh] flex items-center"
       style={{
         backgroundImage: "url('/bg.png')",
         backgroundSize: "cover",
-        backgroundPosition: "right center", // important for mobile
+        backgroundPosition: "center right",
       }}
     >
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/50 md:bg-black/40"></div>
+      <div className="absolute inset-0 bg-black/55 md:bg-black/45 lg:bg-black/40"></div>
 
       <Container>
-        <div className="relative z-10 w-full md:w-1/2 text-white">
+        <div className="relative z-10 max-w-2xl text-white">
 
-          <div className="space-y-5 text-center md:text-left">
+          <div className="space-y-6 text-center md:text-left">
 
-            <p className="uppercase tracking-[4px] text-xs text-gray-200">
+            {/* Small Label */}
+            <p className="uppercase tracking-[6px] text-xs md:text-sm text-gray-200">
               Premium Ethnic Wear
             </p>
 
-            <h1 className="text-3xl md:text-5xl font-serif leading-tight">
+            {/* Heading */}
+            <h1 className="font-serif font-semibold leading-tight
+                           text-3xl 
+                           md:text-5xl 
+                           lg:text-6xl">
               Where Tradition <br />
               Meets Royal Elegance
             </h1>
 
-            <p className="text-gray-200 text-sm md:text-lg">
-              Premium bridal & festive collections for every special celebration.
+            {/* Sub Text */}
+            <p className="text-gray-200 
+                          text-sm 
+                          md:text-lg 
+                          lg:text-xl 
+                          max-w-xl">
+              Premium bridal & festive collections crafted for your most special celebrations.
             </p>
 
-            <div className="flex flex-col md:flex-row gap-4 mt-6">
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
 
               <button
                 onClick={() => navigate("/products")}
-                className="w-auto md:w-auto py-3 px-6 rounded-full bg-white text-black font-medium hover:opacity-90 transition"
+                className="px-8 py-3 md:py-4 rounded-full bg-white text-black font-medium 
+                           hover:scale-105 transition duration-300"
               >
                 Explore Collection
               </button>
 
               <button
                 onClick={() => navigate("/products?category=Lehenga")}
-                className="w-auto md:w-auto py-3 px-6 rounded-full bg-[#8B1E2D] text-white hover:opacity-90 transition"
+                className="px-8 py-3 md:py-4 rounded-full bg-[#8B1E2D] text-white 
+                           hover:scale-105 transition duration-300"
               >
                 Wedding Collection
               </button>
@@ -113,55 +126,6 @@ function Hero({ navigate }) {
   );
 }
 
-// function Categories({ navigate }) {
-//   const categories = [
-//     { name: "Sarees", image: "/categories/Sarees.jpg" },
-//     { name: "Designer Suits", image: "/categories/Designer Suits.jpg" },
-//     { name: "Unstiched Suits", image: "/categories/Unstiched Suits.jpg" },
-//     { name: "Lehenga", image: "/categories/Lehenga.jpg" },
-//     { name: "Party Wear", image: "/categories/Party Wear.jpg" },
-//     { name: "New Arrivals", image: "/categories/New Arrivals.jpg" },
-//   ];
-
-//   return (
-//     <section className="py-1 bg-white ">
-//       <Container>
-
-//         {/* <h2 className="text-2xl font-serif text-center text-[#8B1E2D] mb-10">
-//           SHOP BY CATEGORY
-//         </h2> */}
-
-//         {/* Mobile Scroll */}
-//         <div className="flex md:grid md:grid-cols-3 gap-2 overflow-x-auto md:overflow-visible pb-4 no-scrollbar ">
-
-//           {categories.map((cat, index) => (
-//             <div
-//               key={index}
-//               onClick={() =>
-//                 navigate(`/products?category=${encodeURIComponent(cat.name)}`)
-//               }
-//               className="min-w-[75px] md:min-w-0 text-center cursor-pointer group"
-//             >
-//               <div className="w-16 h-16 rounded-full border-2 overflow-hidden bg-white shadow-sm         border-[#C4A24B] shadow-md group-hover:scale-105 transition duration-300">
-//                 <img
-//                   src={cat.image}
-//                   alt={cat.name}
-//                   className="w-full h-full object-cover"
-//                 />
-//               </div>
-
-//               <p className="mt-3 text-sm md:text-base font-medium text-[#3E2C1C] whitespace-nowrap ">
-//                 {cat.name}
-//               </p>
-//             </div>
-//           ))}
-
-//         </div>
-
-//       </Container>
-//     </section>
-//   );
-// }
 function Categories({ navigate }) {
   const categories = [
     { name: "Sarees", image: "/categories/Sarees.jpg" },
@@ -216,7 +180,7 @@ function WeddingBanner() {
 
   return (
     <section
-      className="relative py-20 md:py-24 bg-cover bg-center"
+      className="relative h-[45vh] md:h-[70vh] lg:h-[80vh] flex items-center"
       style={{
         backgroundImage: "url('/bg.png')",
       }}

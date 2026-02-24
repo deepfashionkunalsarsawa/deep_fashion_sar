@@ -1,23 +1,25 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Container from "../components/common/Container";
-import { getProductById } from "../services/productService";
+import { getProductById, getProducts } from "../services/productService";
 
 export default function ProductDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [product, setProduct] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
 
-  // Temporary static options (since backend doesn't store these yet)
-  const sizes = ["S", "M", "L", "XL"];
+  const sizes = ["M", "L", "XL", "XXL"];
   const colors = ["Maroon", "Purple", "Red"];
 
   useEffect(() => {
     fetchProduct();
+    fetchRelatedProducts();
   }, []);
 
   const fetchProduct = async () => {
@@ -25,20 +27,30 @@ export default function ProductDetails() {
       const data = await getProductById(id);
       setProduct(data);
       setSelectedImage(data.images?.[0]?.image_url || "");
-    
-    }
-      catch (error) {
+    } catch (error) {
       console.error(error);
       alert("Something went wrong");
     }
+  };
 
-
-
+  const fetchRelatedProducts = async () => {
+    try {
+      const data = await getProducts();
+      setRelatedProducts(data.slice(0, 8));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   if (!product) {
     return <div className="p-10 text-center">Loading...</div>;
   }
+
+  // Discount Logic (+400 fake MRP)
+  const originalPrice = product.price + 400;
+  const discountPercent = Math.round(
+    ((originalPrice - product.price) / originalPrice) * 100
+  );
 
   const handleWhatsAppOrder = () => {
     const message = `
@@ -60,7 +72,7 @@ Price: ₹${product.price}
   return (
     <section className="py-16 bg-soft min-h-screen">
       <Container>
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="grid md:grid-cols-2 gap-12">
 
           {/* Image Section */}
           <div>
@@ -79,7 +91,7 @@ Price: ₹${product.price}
                   src={img.image_url}
                   alt="thumbnail"
                   onClick={() => setSelectedImage(img.image_url)}
-                  className="w-20 h-20 object-cover rounded-lg cursor-pointer border"
+                  className="w-20 h-20 object-cover rounded-lg cursor-pointer border hover:border-primary"
                 />
               ))}
             </div>
@@ -87,29 +99,50 @@ Price: ₹${product.price}
 
           {/* Details Section */}
           <div className="space-y-6">
+
             <h1 className="text-3xl font-bold text-primary">
               {product.name}
             </h1>
 
-            <p className="text-xl font-semibold text-primary">
-              ₹ {product.price}
-            </p>
+            {/* Price Section with Discount */}
+            <div>
+              <div className="flex items-center gap-4">
+                <span className="text-2xl font-bold text-primary">
+                  ₹{product.price}
+                </span>
 
-            <p>{product.description}</p>
+                <span className="text-gray-400 line-through text-lg">
+                  ₹{originalPrice}
+                </span>
+
+                <span className="text-green-600 font-semibold text-sm">
+                  {discountPercent}% OFF
+                </span>
+              </div>
+
+              <p className="text-green-600 text-sm mt-1">
+                Save ₹400
+              </p>
+            </div>
+
+            <p className="text-gray-600">{product.description}</p>
 
             {/* Size Selector */}
             <div>
-              <p className="font-semibold mb-2">Select Size:</p>
-              <div className="flex gap-3">
+              <p className="font-semibold mb-3 text-lg">Select Size:</p>
+              <div className="flex gap-3 flex-wrap">
                 {sizes.map((size) => (
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`px-4 py-2 border rounded-lg ${
-                      selectedSize === size
-                        ? "bg-primary text-white"
-                        : ""
-                    }`}
+                    className={`
+                      px-5 py-2 rounded-lg border transition duration-300
+                      ${
+                        selectedSize === size
+                          ? "bg-primary text-white border-primary"
+                          : "bg-white text-gray-700 border-gray-300 hover:border-primary"
+                      }
+                    `}
                   >
                     {size}
                   </button>
@@ -119,17 +152,20 @@ Price: ₹${product.price}
 
             {/* Color Selector */}
             <div>
-              <p className="font-semibold mb-2">Select Color:</p>
-              <div className="flex gap-3">
+              <p className="font-semibold mb-3 text-lg">Select Color:</p>
+              <div className="flex gap-3 flex-wrap">
                 {colors.map((color) => (
                   <button
                     key={color}
                     onClick={() => setSelectedColor(color)}
-                    className={`px-4 py-2 border rounded-lg ${
-                      selectedColor === color
-                        ? "bg-primary text-white"
-                        : ""
-                    }`}
+                    className={`
+                      px-5 py-2 rounded-lg border transition duration-300
+                      ${
+                        selectedColor === color
+                          ? "bg-primary text-white border-primary"
+                          : "bg-white text-gray-700 border-gray-300 hover:border-primary"
+                      }
+                    `}
                   >
                     {color}
                   </button>
@@ -145,20 +181,72 @@ Price: ₹${product.price}
                 min="1"
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
-                className="border px-3 py-2 rounded-lg w-24"
+                className="border px-4 py-2 rounded-lg w-24"
               />
             </div>
 
             {/* WhatsApp Button */}
             <button
               onClick={handleWhatsAppOrder}
-              className="bg-primary text-white px-6 py-3 rounded-full shadow-lg hover:bg-secondary transition"
+              className="
+                w-full md:w-auto
+                bg-[#8B1E2D]
+                hover:bg-[#741826]
+                text-white
+                font-semibold
+                py-3 px-8
+                rounded-full
+                shadow-lg
+                hover:shadow-xl
+                transition-all duration-300
+              "
             >
               Order on WhatsApp
             </button>
+
+          </div>
+        </div>
+
+        {/* Related Products */}
+        <div className="mt-20">
+          <h2 className="text-2xl font-bold mb-8 text-primary">
+            You May Also Like
+          </h2>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {relatedProducts.slice(0, 8).map((item) => (
+              <div
+                key={item.id}
+                onClick={() => navigate(`/product/${item.id}`)}
+                className="bg-white rounded-2xl shadow-md p-4 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition"
+              >
+                <img
+                  src={item.images?.[0]?.image_url}
+                  alt={item.name}
+                  className="w-full h-[200px] object-cover rounded-xl"
+                />
+
+                <h3 className="mt-3 text-sm font-medium text-[#3E2C1C]">
+                  {item.name}
+                </h3>
+
+                <p className="mt-1 font-semibold text-[#3E2C1C]">
+                  ₹{item.price}
+                </p>
+              </div>
+            ))}
           </div>
 
+          <div className="text-center mt-10">
+            <button
+              onClick={() => navigate("/products")}
+              className="bg-primary text-white px-8 py-3 rounded-full hover:bg-secondary transition"
+            >
+              View All Products
+            </button>
+          </div>
         </div>
+
       </Container>
     </section>
   );
