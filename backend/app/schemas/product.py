@@ -1,7 +1,8 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
 class ProductImageSchema(BaseModel):
+    id: int
     image_url: str
 
     class Config:
@@ -25,7 +26,7 @@ class ProductSchema(BaseModel):
         from_attributes = True
 
 
-from typing import List, Optional
+
 
 class ProductCreate(BaseModel):
     name: str
