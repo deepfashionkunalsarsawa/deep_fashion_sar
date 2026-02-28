@@ -35,6 +35,7 @@ app.add_middleware(
         "http://localhost:5174",
         "https://deepfashionsarsawa.vercel.app"
     ],
+    
 
     allow_credentials=True,
     allow_methods=["*"],

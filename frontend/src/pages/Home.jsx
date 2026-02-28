@@ -130,7 +130,7 @@ function Categories({ navigate }) {
   const categories = [
     { name: "Sarees", image: "/categories/Sarees.jpg" },
     { name: "Designer Suits", image: "/categories/Designer Suits.jpg" },
-    { name: "Unstitched Suits", image: "/categories/Unstiched Suits.jpg" },
+    { name: "Unstitched Suits", image: "/categories/Unstitched Suits.jpg" },
     { name: "Lehenga", image: "/categories/Lehenga.jpg" },
     { name: "Party Wear", image: "/categories/Party Wear.jpg" },
     { name: "New Arrivals", image: "/categories/New Arrivals.jpg" },
@@ -384,7 +384,7 @@ function LatestArrivals({ products }) {
               </h3>
 
               <div className="flex items-center mt-1 text-yellow-500 text-sm">
-                ★★★★☆
+                ★★★★★
               </div>
             </div>
           ))}

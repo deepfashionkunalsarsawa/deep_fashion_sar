@@ -30,7 +30,7 @@ export default function Products() {
     const validCategories = [
       "Sarees",
       "Designer Suits",
-      "Unstiched Suits",
+      "Unstitched Suits",
       "Lehenga",
       "Party Wear",
       "New Arrivals",
@@ -121,8 +121,8 @@ export default function Products() {
 
 
         {/* CATEGORY SLIDER */}
-        <div className="flex gap-4 overflow-x-auto pb-5 no-scrollbar">
-          {["Sarees", "Lehenga", "Designer Suits", "Party Wear", "Unstiched Suits"].map((cat) => (
+        <div className="flex gap-4 overflow-x-auto pb-5 no-scrollbar md:grid md:grid-cols-6">
+          {["Sarees", "Lehenga", "Designer Suits", "Party Wear", "Unstitched Suits"].map((cat) => (
             <div
               key={cat}
               onClick={() =>
@@ -133,7 +133,7 @@ export default function Products() {
               className="flex flex-col items-center min-w-[75px] cursor-pointer"
             >
               <div
-                className={`w-16 h-16 rounded-full border-2 ${
+                className={`w-20 h-20 md:w-24 md:h-24 rounded-full border-2 ${
                   categoryFilter === cat
                     ? "border-[#8B6A2B]"
                     : "border-[#D4AF37]"
@@ -219,9 +219,11 @@ export default function Products() {
               </div>
 
               <div className="mt-4">
+                <h5 className="text-gray-400 font-light text-bold text-xs" >DEEP FASHION</h5>
                 <h3 className="text-sm md:text-base font-medium text-[#3E2C1C]">
                   {product.name}
                 </h3>
+                
 
 
                 <div className="mt-2">
