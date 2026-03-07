@@ -9,7 +9,7 @@ export default function AddProduct() {
   const [occasion, setOccasion] = useState("");
   const [fabric, setFabric] = useState("");
   const [careInstruction, setCareInstruction] = useState("");
-  const [stock, setStock] = useState(0);
+  const [stock, setStock] = useState(10);
   // const [image, setImage] = useState(null);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -105,13 +105,26 @@ export default function AddProduct() {
           onChange={(e) => setPrice(e.target.value)}
         />
 
-        <input
+        {/* <input
           type="text"
           placeholder="Category"
           value={category}
           className="w-full border p-2 rounded"
           onChange={(e) => setCategory(e.target.value)}
-        />
+        /> */}
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="w-full border p-2 rounded"
+        >
+          <option value="">Select Category</option>
+          <option value="Sarees">Sarees</option>
+          <option value="Lehenga">Lehenga</option>
+          <option value="Designer Suits">Designer Suits</option>
+          <option value="Party Wears">Party Wears</option>
+          <option value="Unstitched Suits">Unstitched Suits</option>
+        </select>
+
 
         <input
           type="text"
@@ -129,13 +142,26 @@ export default function AddProduct() {
           onChange={(e) => setCareInstruction(e.target.value)}
         />
 
-        <input
+        {/* <input
           type="text"
           placeholder="Occasion"
           value={occasion}
           className="w-full border p-2 rounded"
           onChange={(e) => setOccasion(e.target.value)}
-        />
+        /> */}
+
+        <select
+          value={occasion}
+          onChange={(e) => setOccasion(e.target.value)}
+          className="w-full border p-2 rounded"
+        >
+          <option value="">Select Occasion</option>
+          <option value="Wedding">Wedding</option>
+          <option value="Festival">Festival</option>
+          <option value="Casual">Casual</option>
+        </select>
+
+
 
         <input
           type="number"

@@ -131,13 +131,28 @@ export default function EditProduct() {
           className="w-full border p-2 rounded"
         />
 
-        <input
+        {/* <input
           name="category"
           value={form.category || ""}
           placeholder="Category"
           onChange={handleChange}
           className="w-full border p-2 rounded"
-        />
+        /> */}
+
+        <select
+          name="category"
+          value={form.category || ""}
+          onChange={handleChange}
+          className="w-full border p-2 rounded"
+        >
+          <option value="">Select Category</option>
+          <option value="Sarees">Sarees</option>
+          <option value="Lehenga">Lehenga</option>
+          <option value="Designer Suits">Designer Suits</option>
+          <option value="Party Wear">Party Wear</option>
+          <option value="Unstitched Suits">Unstitched Suits</option>
+        </select>
+
 
         <textarea
           name="description"
@@ -147,13 +162,26 @@ export default function EditProduct() {
           className="w-full border p-2 rounded"
         />
 
-        <input
+        {/* <input
           name="occasion"
           value={form.occasion || ""}
           placeholder="Occasion"
           onChange={handleChange}
           className="w-full border p-2 rounded"
-        />
+        /> */}
+
+        <select
+          name="occasion"
+          value={form.occasion || ""}
+          onChange={handleChange}
+          className="w-full border p-2 rounded"
+        >
+          <option value="">Select Occasion</option>
+          <option value="Wedding">Wedding</option>
+          <option value="Festival">Festival</option>
+          <option value="Casual">Casual</option>
+        </select>
+
 
         <input
           name="fabric"
