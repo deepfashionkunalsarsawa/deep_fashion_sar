@@ -17,6 +17,12 @@ export default function ProductDetails() {
   const sizes = ["M", "L", "XL", "XXL"];
   const colors = ["Maroon", "Purple", "Red"];
 
+  const makeLastDigitFive = (price) => {
+    const rounded = Math.round(price / 10) * 10;
+    return rounded - 5;
+  };
+
+
   useEffect(() => {
     window.scrollTo(0, 0);
     setProduct(null);          
@@ -74,10 +80,17 @@ export default function ProductDetails() {
   
   const discountPercent = 52;
 
-  const originalPrice = product.price; // actual price
-  const finalPrice = Math.round(product.price * (1 - discountPercent / 100));
+  // const originalPrice = product.price; // actual price
+  // const finalPrice = Math.round(product.price * (1 - discountPercent / 100));
+
+  // const savedAmount = originalPrice - finalPrice;
+  const originalPrice = makeLastDigitFive(product.price);
+
+  const finalPriceRaw = product.price * (1 - discountPercent / 100);
+  const finalPrice = makeLastDigitFive(finalPriceRaw);
 
   const savedAmount = originalPrice - finalPrice;
+
 
   const handleWhatsAppOrder = () => {
     const message = `
@@ -97,6 +110,11 @@ Price: ₹${product.price}
   };
 
   return (
+
+
+    
+
+
     <section className="py-16 bg-soft min-h-screen">
       <Container>
         <div className="grid md:grid-cols-2 gap-12">
@@ -196,7 +214,7 @@ Price: ₹${product.price}
                   {/* Location Icon */}
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                     
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                   </svg>
 
                 </span>
@@ -210,7 +228,7 @@ Price: ₹${product.price}
 
                   {/* Trust Icon */}
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                   </svg>
 
                 </span>
@@ -295,8 +313,13 @@ Price: ₹${product.price}
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {relatedProducts.map((item) => {
-              const itemFinal = Math.round(item.price * 0.48);
-              const itemSaved = item.price - itemFinal;
+              // const itemFinal = Math.round(item.price * 0.48);
+              // const itemSaved = item.price - itemFinal;
+
+              const itemOriginal = makeLastDigitFive(item.price);
+              const itemFinal = makeLastDigitFive(item.price * 0.48);
+              const itemSaved = itemOriginal - itemFinal;
+
 
               return (
                 <div
@@ -325,7 +348,8 @@ Price: ₹${product.price}
                       </span>
 
                       <span className="text-gray-400 line-through text-sm">
-                        ₹{item.price}
+                        {/* ₹{item.price} */}
+                        ₹{itemOriginal}
                       </span>
                     </div>
 
@@ -349,6 +373,44 @@ Price: ₹${product.price}
         </div>
 
       </Container>
+
+      {/* Sticky WhatsApp Order Bar */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg p-3 md:hidden z-50">
+        <div className="flex items-center justify-between max-w-lg mx-auto">
+
+          <div>
+            <p className="text-lg font-bold text-primary">
+              ₹{finalPrice}
+            </p>
+
+            <p className="text-xs text-gray-400 line-through">
+              ₹{originalPrice}
+            </p>
+          </div>
+
+          <button
+            onClick={handleWhatsAppOrder}
+            className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-full font-semibold flex items-center gap-2"
+          >
+            {/* WhatsApp Icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32 32"
+              width="18"
+              height="18"
+              fill="currentColor"
+            >
+              <path d="M19.11 17.38c-.27-.14-1.58-.78-1.82-.87-.24-.09-.42-.14-.6.14-.18.27-.69.87-.85 1.05-.16.18-.31.2-.58.07-.27-.14-1.15-.42-2.18-1.34-.8-.72-1.34-1.61-1.5-1.88-.16-.27-.02-.42.12-.56.12-.12.27-.31.4-.47.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.47-.07-.14-.6-1.44-.82-1.98-.22-.53-.45-.46-.6-.47l-.51-.01c-.18 0-.47.07-.72.34-.25.27-.96.94-.96 2.3 0 1.36.98 2.67 1.12 2.86.14.18 1.93 2.95 4.68 4.13.65.28 1.16.45 1.56.57.66.21 1.26.18 1.73.11.53-.08 1.58-.65 1.8-1.28.22-.63.22-1.17.16-1.28-.07-.11-.24-.18-.51-.31z"/>
+              <path d="M16.03 3C9.4 3 4 8.4 4 15.03c0 2.64.86 5.07 2.32 7.03L4 29l7.17-2.29a12.03 12.03 0 004.86 1.02c6.63 0 12.03-5.4 12.03-12.03C28.06 8.4 22.66 3 16.03 3zm0 21.84c-1.69 0-3.35-.45-4.8-1.3l-.34-.2-4.26 1.36 1.39-4.15-.22-.34a9.82 9.82 0 01-1.5-5.18c0-5.44 4.43-9.87 9.87-9.87s9.87 4.43 9.87 9.87-4.43 9.87-9.87 9.87z"/>
+            </svg>
+
+            Order Now
+          </button>
+
+        </div>
+      </div>
+
+
     </section>
   );
 }

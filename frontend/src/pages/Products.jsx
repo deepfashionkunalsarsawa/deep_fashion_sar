@@ -58,6 +58,12 @@ export default function Products() {
     }
   }, [location.search]);
 
+
+  const makeLastDigitFive = (price) => {
+    const rounded = Math.round(price / 10) * 10;
+    return rounded - 5;
+  };  
+
   const fetchProducts = async () => {
     try {
       const data = await getProducts();
@@ -148,7 +154,7 @@ export default function Products() {
 
         {/* CATEGORY SLIDER */}
         <div className="flex gap-4 overflow-x-auto pb-5 no-scrollbar md:grid md:grid-cols-6">
-          {["Sarees", "Lehenga", "Designer Suits", "Party Wear", "Unstitched Suits"].map((cat) => (
+          {["Sarees", "Lehenga", "Designer Suits", "Party Wear", "Unstitched Suits", "Anarkali Frocksuits"].map((cat) => (
             <div
               key={cat}
               onClick={() =>
@@ -216,10 +222,24 @@ export default function Products() {
         ">
           {filteredProducts.map((product) => {
 
+            // const discountPercent = 52;
+            // const originalPrice = product.price;
+            // const finalPrice = Math.round(product.price * (1 - discountPercent / 100));
+            // const savedAmount = originalPrice - finalPrice;
+
+
+
+
             const discountPercent = 52;
-            const originalPrice = product.price;
-            const finalPrice = Math.round(product.price * (1 - discountPercent / 100));
+
+            const originalPrice = makeLastDigitFive(product.price);
+
+            const finalPriceRaw = product.price * (1 - discountPercent / 100);
+            const finalPrice = makeLastDigitFive(finalPriceRaw);
+
             const savedAmount = originalPrice - finalPrice;
+
+
 
             return (
 
