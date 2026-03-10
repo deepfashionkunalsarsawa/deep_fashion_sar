@@ -165,6 +165,15 @@ Price: ₹${product.price}
 
             <p className="text-gray-600">{product.description}</p>
 
+
+            {product.fabric && (
+              <div className="text-gray-700">
+                <span className="font-semibold text-primary">Fabric:</span>{" "}
+                {product.fabric}
+              </div>
+            )}
+
+
             {/* Size Selector */}
             <div>
               <p className="font-semibold mb-3 text-lg">Select Size:</p>
@@ -187,7 +196,7 @@ Price: ₹${product.price}
             </div>
 
             {/* Color Selector */}
-            <div>
+            {/* <div>
               <p className="font-semibold mb-3 text-lg">Select Color:</p>
               <div className="flex gap-3 flex-wrap">
                 {colors.map((color) => (
@@ -205,7 +214,7 @@ Price: ₹${product.price}
                   </button>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Quantity */}
             <div>
