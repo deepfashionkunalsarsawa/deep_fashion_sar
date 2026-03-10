@@ -134,6 +134,8 @@ function Categories({ navigate }) {
     { name: "Lehenga", image: "/categories/Lehenga.jpg" },
     { name: "Party Wear", image: "/categories/Party Wear.jpg" },
     { name: "New Arrivals", image: "/categories/New Arrivals.jpg" },
+    { name: "Anarkali Frocksuits", image: "/categories/Anarkali Frocksuits.jpg" },
+
   ];
 
   return (

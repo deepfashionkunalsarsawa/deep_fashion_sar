@@ -151,6 +151,7 @@ export default function EditProduct() {
           <option value="Designer Suits">Designer Suits</option>
           <option value="Party Wear">Party Wear</option>
           <option value="Unstitched Suits">Unstitched Suits</option>
+          <option value="Anarkali Frocksuits">Anarkali Frocksuits</option>
         </select>
 
 

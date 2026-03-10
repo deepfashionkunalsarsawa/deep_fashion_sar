@@ -48,6 +48,7 @@ export default function Products() {
       "Lehenga",
       "Party Wear",
       "New Arrivals",
+      "Anarkali Frocksuits",
     ];
 
     if (validCategories.includes(category)) {
