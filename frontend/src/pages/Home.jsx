@@ -6,6 +6,10 @@ import { getProducts } from "../services/productService";
 import { useLocation } from "react-router-dom";
 import { useRef } from "react";
 
+
+
+
+
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,9 +17,42 @@ export default function Home() {
   const navigate = useNavigate();
   const location = useLocation();
 
+
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+
+
+
   useEffect(() => {
     fetchFeatured();
   }, []);
+    
+  useEffect(() => {
+    const handler = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener("beforeinstallprompt", handler);
+
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+
+  const installApp = async () => {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+
+    const choice = await deferredPrompt.userChoice;
+
+    if (choice.outcome === "accepted") {
+      console.log("User installed the app");
+    } else {
+      console.log("User dismissed install");
+    }
+
+    setDeferredPrompt(null);
+  };
 
   const fetchFeatured = async () => {
     try {
@@ -52,6 +89,42 @@ export default function Home() {
       
       <WeddingBanner/>
       <StoreLocation/>
+
+            
+      {deferredPrompt && (
+        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md">
+
+          <div className="flex items-center justify-between bg-white shadow-xl rounded-xl px-4 py-3 border">
+
+            <div className="flex items-center gap-3">
+              <img
+                src="/icon-192.png"
+                alt="Deep Fashion"
+                className="w-10 h-10 rounded-lg"
+              />
+
+              <div className="text-left">
+                <p className="text-sm font-semibold text-[#3E2C1C]">
+                  Deep Fashion App
+                </p>
+                <p className="text-xs text-gray-500">
+                  Install for faster shopping
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={installApp}
+              className="bg-[#8B1E2D] text-white text-sm px-4 py-1.5 rounded-lg hover:opacity-90"
+            >
+              Install
+            </button>
+
+          </div>
+
+        </div>
+      )}
+
       
     </div>
   );

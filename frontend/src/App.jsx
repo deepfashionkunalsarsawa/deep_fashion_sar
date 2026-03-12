@@ -96,14 +96,14 @@ function App() {
 
 
 
-      {deferredPrompt && (
+      {/* {deferredPrompt && (
         <button
           onClick={installApp}
           className="fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded-lg shadow-lg z-50"
         >
           Install App
         </button>
-      )}
+      )} */}
 
 
 
