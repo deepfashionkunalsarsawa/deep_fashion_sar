@@ -15,9 +15,32 @@ import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+
+
+
+
+import { useState, useEffect } from "react";
+
 function App() {
 
   const ADMIN_PATH = import.meta.env.VITE_ADMIN_SECRET_PATH;
+
+
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+
+    useEffect(() => {
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        setDeferredPrompt(e);
+      });
+    }, []);
+
+    const installApp = () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+      }
+    };
+
   
 
   return (
@@ -69,6 +92,20 @@ function App() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/refund" element={<Refund />} />
       </Routes>
+
+
+
+
+      {deferredPrompt && (
+        <button
+          onClick={installApp}
+          className="fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded-lg shadow-lg z-50"
+        >
+          Install App
+        </button>
+      )}
+
+
 
       <Footer />
     </BrowserRouter>
