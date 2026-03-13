@@ -15,10 +15,6 @@ import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-
-
-
-
 import { useState, useEffect } from "react";
 
 function App() {
@@ -28,18 +24,18 @@ function App() {
 
   const [deferredPrompt, setDeferredPrompt] = useState(null);
 
-    useEffect(() => {
-      window.addEventListener("beforeinstallprompt", (e) => {
-        e.preventDefault();
-        setDeferredPrompt(e);
-      });
-    }, []);
+    // useEffect(() => {
+    //   window.addEventListener("beforeinstallprompt", (e) => {
+    //     e.preventDefault();
+    //     setDeferredPrompt(e);
+    //   });
+    // }, []);
 
-    const installApp = () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-      }
-    };
+    // const installApp = () => {
+    //   if (deferredPrompt) {
+    //     deferredPrompt.prompt();
+    //   }
+    // };
 
   
 
@@ -91,6 +87,7 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/refund" element={<Refund />} />
+
       </Routes>
 
 

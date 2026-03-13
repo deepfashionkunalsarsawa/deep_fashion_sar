@@ -45,7 +45,8 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="text-center text-sm mt-10 opacity-80">
-          © {new Date().getFullYear()} Deep Fashion Sarsawa. All rights reserved.
+          © {new Date().getFullYear()} Deep Fashion Sarsawa. All rights reserved.<br />
+          Powered by Kunal
         </div>
 
       </div>

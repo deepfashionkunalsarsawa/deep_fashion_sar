@@ -16,6 +16,7 @@ export default function Home() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const [categoryFilter, setCategoryFilter] = useState("");
 
 
   const [deferredPrompt, setDeferredPrompt] = useState(null);

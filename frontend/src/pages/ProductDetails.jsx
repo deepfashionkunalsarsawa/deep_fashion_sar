@@ -36,6 +36,14 @@ export default function ProductDetails() {
   }, [id]);
 
 
+    
+  useEffect(() => {
+    if (product) {
+      document.title = `${product.name} | Deep Fashion Sarsawa`;
+    }
+  }, [product]);
+
+
   const fetchProduct = async () => {
     try {
       const data = await getProductById(id);
@@ -414,3 +422,6 @@ Price: ₹${product.price}
     </section>
   );
 }
+
+
+
