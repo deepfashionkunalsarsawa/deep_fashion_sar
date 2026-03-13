@@ -130,30 +130,135 @@ export default function Home() {
   );
 }
 
+// function Hero({ navigate }) {
+//   return (
+//     <section
+//       className="relative h-[45vh] md:h-[90vh] lg:h-[100vh] flex items-center"
+//       style={{
+//         backgroundImage: "url('/bg.png')",
+//         backgroundSize: "cover",
+//         backgroundPosition: "center right",
+//       }}
+//     >
+//       {/* Dark Overlay */}
+//       <div className="absolute inset-0 bg-black/55 md:bg-black/45 lg:bg-black/40"></div>
+
+//       <Container>
+//         <div className="relative z-10 max-w-2xl text-white">
+
+//           <div className="space-y-6 text-center md:text-left">
+
+//             {/* Small Label */}
+//             <p className="uppercase tracking-[6px] text-xs md:text-sm text-gray-200">
+//               Premium Ethnic Wear
+//             </p>
+
+//             {/* Heading */}
+//             <h1 className="font-serif font-semibold leading-tight
+//                            text-3xl 
+//                            md:text-5xl 
+//                            lg:text-6xl">
+//               Where Tradition <br />
+//               Meets Royal Elegance
+//             </h1>
+
+//             {/* Sub Text */}
+//             <p className="text-gray-200 
+//                           text-sm 
+//                           md:text-lg 
+//                           lg:text-xl 
+//                           max-w-xl">
+//               Premium bridal & festive collections crafted for your most special celebrations.
+//             </p>
+
+//             {/* Buttons */}
+//             <div className="flex flex-col sm:flex-row gap-4 pt-4">
+
+//               <button
+//                 onClick={() => navigate("/products")}
+//                 className="px-8 py-3 md:py-4 rounded-full bg-white text-black font-medium 
+//                            hover:scale-105 transition duration-300"
+//               >
+//                 Explore Collection
+//               </button>
+
+//               <button
+//                 onClick={() => navigate("/products?category=Lehenga")}
+//                 className="px-8 py-3 md:py-4 rounded-full bg-[#8B1E2D] text-white 
+//                            hover:scale-105 transition duration-300"
+//               >
+//                 Wedding Collection
+//               </button>
+
+//             </div>
+
+//           </div>
+//         </div>
+//       </Container>
+//     </section>
+//   );
+// }
+
+
+
+
 function Hero({ navigate }) {
+  const banners = [
+    "/hero/hero1.jpg",
+    "/hero/hero2.jpg",
+    "/hero/hero3.jpg"
+  ];
+
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const slider = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % banners.length);
+    }, 4000);
+
+    return () => clearInterval(slider);
+  }, []);
+
   return (
     <section
-      className="relative h-[45vh] md:h-[90vh] lg:h-[100vh] flex items-center"
+      className="relative h-[45vh] md:h-[90vh] lg:h-[100vh] flex items-center transition-all duration-700"
       style={{
-        backgroundImage: "url('/bg.png')",
+        backgroundImage: `url(${banners[current]})`,
         backgroundSize: "cover",
-        backgroundPosition: "center right",
+        backgroundPosition: "center"
       }}
     >
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/55 md:bg-black/45 lg:bg-black/40"></div>
+      <div className="absolute inset-0 bg-black/50"></div>
 
       <Container>
+        {/* <div className="relative z-10 text-white max-w-xl">
+
+          <h1 className="text-3xl md:text-5xl font-serif">
+            Where Tradition Meets Royal Elegance
+          </h1>
+
+          <button
+            onClick={() => navigate("/products")}
+            // className="mt-6 px-8 py-3 bg-white text-black rounded-full"
+            className="px-8 py-3 md:py-4 rounded-full bg-white text-black font-medium 
+                       hover:scale-105 transition duration-300"
+          >
+            Explore Collection
+          </button>
+          
+        </div> */}
+
+
         <div className="relative z-10 max-w-2xl text-white">
 
           <div className="space-y-6 text-center md:text-left">
 
-            {/* Small Label */}
+            
             <p className="uppercase tracking-[6px] text-xs md:text-sm text-gray-200">
               Premium Ethnic Wear
             </p>
 
-            {/* Heading */}
+            
             <h1 className="font-serif font-semibold leading-tight
                            text-3xl 
                            md:text-5xl 
@@ -162,7 +267,7 @@ function Hero({ navigate }) {
               Meets Royal Elegance
             </h1>
 
-            {/* Sub Text */}
+            
             <p className="text-gray-200 
                           text-sm 
                           md:text-lg 
@@ -171,7 +276,7 @@ function Hero({ navigate }) {
               Premium bridal & festive collections crafted for your most special celebrations.
             </p>
 
-            {/* Buttons */}
+            
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
 
               <button
@@ -194,6 +299,8 @@ function Hero({ navigate }) {
 
           </div>
         </div>
+
+        
       </Container>
     </section>
   );
