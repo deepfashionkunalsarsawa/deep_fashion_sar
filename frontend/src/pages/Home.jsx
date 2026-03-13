@@ -363,14 +363,16 @@ function WeddingBanner() {
 
   return (
     <section
-      className="relative h-[45vh] md:h-[70vh] lg:h-[80vh] flex items-center"
+      // className="relative h-[45vh] md:h-[70vh] lg:h-[80vh] flex items-center"
+      className="relative h-[45vh] md:h-[70vh] lg:h-[80vh] flex items-center bg-cover bg-center"
       style={{
-        backgroundImage: "url('/bg.png')",
+        backgroundImage: "url('/wbg.png')",
       }}
     >
       {/* Overlay */}
       
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/10 to-black/30"></div>
+      {/* <div className="absolute inset-0 bg-white/10" /> */}
 
       <Container>
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10 text-white">
@@ -502,6 +504,22 @@ function StoreLocation() {
 
         </div>
 
+        <div className="mt-10 text-center">
+
+          <h2 className="text-2xl md:text-3xl font-serif font-semibold text-[#3E2C1C] mb-4">
+            Review
+          </h2>
+
+          <a
+            href="https://g.page/r/CTnk4CIExcv9EBM/review"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex justify-center text-6xl text-[#C4A24B] hover:scale-110 transition"
+          >
+            ☆ ☆ ☆ ☆ ☆
+          </a>
+
+        </div>
       </Container>
     </section>
   );
