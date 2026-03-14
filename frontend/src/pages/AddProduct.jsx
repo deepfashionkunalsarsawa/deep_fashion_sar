@@ -121,7 +121,7 @@ export default function AddProduct() {
           <option value="Sarees">Sarees</option>
           <option value="Lehenga">Lehenga</option>
           <option value="Designer Suits">Designer Suits</option>
-          <option value="Party Wears">Party Wears</option>
+          <option value="Party Wears">Party Wear</option>
           <option value="Unstitched Suits">Unstitched Suits</option>
           <option value="Anarkali Frocksuits">Anarkali Frocksuits</option>
         </select>
