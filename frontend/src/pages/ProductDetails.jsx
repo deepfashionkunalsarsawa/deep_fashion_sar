@@ -107,7 +107,7 @@ Product: ${product.name}
 Size: ${selectedSize || "Not Selected"}
 Color: ${selectedColor || "Not Selected"}
 Quantity: ${quantity}
-Price: ₹${product.price}
+Price: ₹${finalPrice}
 `;
 
     const whatsappURL = `https://wa.me/919557201975?text=${encodeURIComponent(
@@ -189,7 +189,12 @@ Price: ₹${product.price}
 
 
 
-            <p className="text-gray-600">{product.description}</p>
+            {/* <p className="text-gray-600">{product.description}</p> */}
+
+            <p className="text-gray-600 whitespace-pre-line">
+              {product.description}
+            </p>
+
 
 
             {product.fabric && (

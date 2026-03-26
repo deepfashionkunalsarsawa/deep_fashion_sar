@@ -316,6 +316,7 @@ function Categories({ navigate }) {
     { name: "Party Wear", image: "/categories/Party Wear.jpg" },
     { name: "New Arrivals", image: "/categories/New Arrivals.jpg" },
     { name: "Anarkali Frocksuits", image: "/categories/Anarkali Frocksuits.jpg" },
+    { name: "Cord Sets", image: "/categories/Cord Sets.jpg" },
 
   ];
 
@@ -433,6 +434,9 @@ function WeddingBanner() {
 }
 
 function StoreLocation() {
+
+  const instagramLink = "https://www.instagram.com/deepfashionsarsawa?igsh=MXIzNHZsMHI2MjZrcw==";
+  const whatsappGroupLink = "https://chat.whatsapp.com/KxTiEU591NpCQEweyZ4Og4?mode=gi_t";
   const mapsEmbedLink =
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.64832894248!2d77.4012545!3d30.01825269999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390eef000b7f731f%3A0xfdcbc50422e0e439!2sDeep%20fashion%20sarsawa!5e0!3m2!1sen!2sin!4v1771327490589!5m2!1sen!2sin";
 
@@ -504,6 +508,22 @@ function StoreLocation() {
 
         </div>
 
+        {/* <div className="mt-10 text-center">
+
+          <h2 className="text-2xl md:text-3xl font-serif font-semibold text-[#3E2C1C] mb-4">
+            Review
+          </h2>
+
+          <a
+            href="https://g.page/r/CTnk4CIExcv9EBM/review"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex justify-center text-6xl text-[#C4A24B] hover:scale-110 transition"
+          >
+            ☆ ☆ ☆ ☆ ☆
+          </a>
+
+        </div> */}
         <div className="mt-10 text-center">
 
           <h2 className="text-2xl md:text-3xl font-serif font-semibold text-[#3E2C1C] mb-4">
@@ -519,7 +539,43 @@ function StoreLocation() {
             ☆ ☆ ☆ ☆ ☆
           </a>
 
+          {/* 🔥 NEW BUTTONS */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+
+            {/* WhatsApp Group */}
+            <a
+              href={whatsappGroupLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 bg-[#25D366] text-white px-5 py-3 rounded-full shadow-md hover:scale-105 transition"
+            >
+              <img
+                src="/whatsapp.jpg"   // save your image in public folder
+                alt="WhatsApp"
+                className="w-6 h-6 rounded-lg"
+              />
+              Join WhatsApp Group
+            </a>
+
+            {/* Instagram */}
+            <a
+              href={instagramLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white px-5 py-3 rounded-full shadow-md hover:scale-105 transition"
+            >
+              <img
+                src="/instagram.jpg"   // save your image in public folder
+                alt="Instagram"
+                className="w-6 h-6 rounded-lg"
+              />
+              Follow on Instagram
+            </a>
+
+          </div>
+
         </div>
+
       </Container>
     </section>
   );

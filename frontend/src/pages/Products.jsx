@@ -49,6 +49,7 @@ export default function Products() {
       "Party Wear",
       "New Arrivals",
       "Anarkali Frocksuits",
+      "Cord Sets",
     ];
 
     if (validCategories.includes(category)) {
@@ -154,7 +155,7 @@ export default function Products() {
 
         {/* CATEGORY SLIDER */}
         <div className="flex gap-4 overflow-x-auto pb-5 no-scrollbar md:grid md:grid-cols-6">
-          {["Sarees", "Lehenga", "Designer Suits", "Party Wear", "Unstitched Suits", "Anarkali Frocksuits"].map((cat) => (
+          {["Sarees", "Lehenga", "Designer Suits", "Party Wear", "Unstitched Suits", "Anarkali Frocksuits", "Cord Sets"].map((cat) => (
             <div
               key={cat}
               onClick={() =>
