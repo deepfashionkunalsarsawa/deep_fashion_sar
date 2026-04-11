@@ -22,16 +22,18 @@ export default function Cart() {
   };
 
   const handleWhatsAppOrder = () => {
+    const baseURL = window.location.origin; // ✅ ADD THIS
+
     let message = "I want to order:\n\n";
 
     cart.forEach((item, i) => {
       message += `${i + 1}. ${item.name}
-Size: ${item.size}
-Qty: ${item.quantity}
-Price: ₹${item.price}
-Link: ${baseURL}/product/${item.id}
+  Size: ${item.size}
+  Qty: ${item.quantity}
+  Price: ₹${item.price}
+  Link: ${baseURL}/product/${item.id}
 
-`;
+  `;
     });
 
     message += `Total: ₹${getTotal()}`;
