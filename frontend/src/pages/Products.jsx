@@ -144,10 +144,26 @@ export default function Products() {
       <Container>
         <div className="pt-6 pb-4 flex items-center justify-between gap-4">
           
-          <h1 className="text-xl font-serif text-[#3E2C1C]">
+          {/* <h1 className="text-xl font-serif text-[#3E2C1C]">
             Products
+          </h1> */}
+          {/* Top Bar (Back + Title) */}
+          {/* <div className="flex items-center gap-3 mb-6"> */}
+
+          {/* Back Button */}
+          <button
+            onClick={() => navigate(-1)}
+            className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 transition"
+          >
+            ←
+          </button>
+
+          {/* Heading */}
+          <h1 className="text-xl md:text-2xl font-semibold text-primary">
+            Product
           </h1>
 
+          {/* </div> */}
           {/* Smaller Search */}
           <div className="relative w-[55%] max-w-sm">
             <input

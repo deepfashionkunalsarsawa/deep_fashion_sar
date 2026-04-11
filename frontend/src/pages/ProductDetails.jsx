@@ -142,10 +142,34 @@ Price: ₹${finalPrice}
     
 
 
-    <section className="py-16 bg-soft min-h-screen">
+    <section className="pt-3 pb-16 bg-soft min-h-screen">
       <Container>
-        <div className="grid md:grid-cols-2 gap-12">
 
+        {/* Top Bar (Back + Title) */}
+        {/* <div className="flex items-center gap-3 mb-6">
+
+          
+          <button
+            onClick={() => navigate(-1)}
+            className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 transition"
+          >
+            ←
+          </button>
+          
+        </div> */}
+
+        <div className="grid md:grid-cols-2 gap-1">
+          {/* Back Button (Top Left - Below Navbar) */}
+          <div className="mb-1 pl-1">
+            <button
+              onClick={() => navigate(-1)}
+              className="w-10 h-10 flex items-center justify-center 
+              border border-gray-300 rounded-lg shadow-sm 
+              hover:bg-gray-100 transition"
+            >
+              ←
+            </button>
+          </div>
           {/* Image Section */}
           <div>
 

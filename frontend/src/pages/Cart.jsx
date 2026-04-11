@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { getCart, removeFromCart, updateQuantity } from "../utils/cart";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setCart(getCart());
@@ -27,6 +29,7 @@ export default function Cart() {
 Size: ${item.size}
 Qty: ${item.quantity}
 Price: ₹${item.price}
+Link: ${baseURL}/product/${item.id}
 
 `;
     });
@@ -41,8 +44,16 @@ Price: ₹${item.price}
 
   return (
     <div className="p-6 min-h-screen">
-      <h1 className="text-2xl font-bold mb-6">Your Cart</h1>
+      
+      {/* Back Button */}
+      <button
+        onClick={() => navigate(-1)}
+        className="mb-4 text-sm text-gray-600 hover:text-black flex items-center gap-1"
+      >
+        ← Back
+      </button>
 
+      <h1 className="text-2xl font-bold mb-6">Your Cart</h1>
       {cart.length === 0 ? (
         <p>Cart is empty</p>
       ) : (
@@ -54,10 +65,14 @@ Price: ₹${item.price}
             >
               <img
                 src={item.image}
-                className="w-24 h-24 object-cover rounded"
+                onClick={() => navigate(`/product/${item.id}`)}
+                className="w-24 h-24 object-cover rounded cursor-pointer"
               />
 
-              <div className="flex-1">
+              <div 
+                className="flex-1 cursor-pointer"
+                onClick={() => navigate(`/product/${item.id}`)}
+              >
                 <h3 className="font-semibold">{item.name}</h3>
                 <p>Size: {item.size}</p>
 
