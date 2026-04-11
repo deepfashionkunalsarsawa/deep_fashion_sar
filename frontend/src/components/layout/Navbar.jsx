@@ -100,6 +100,7 @@
 
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { getCart } from "../../utils/cart";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -126,7 +127,19 @@ export default function Navbar() {
       setMenuOpen(false);
     }
   };
+  const [cartCount, setCartCount] = useState(0);
 
+  useEffect(() => {
+    const updateCart = () => {
+      const cart = getCart();
+      setCartCount(cart.length);
+    };
+
+    updateCart();
+    window.addEventListener("storage", updateCart);
+
+    return () => window.removeEventListener("storage", updateCart);
+  }, []);
   return (
     <nav className="bg-[#F9F6EF] border-b border-[#e6dcc8]">
 
@@ -156,7 +169,14 @@ export default function Navbar() {
             DEEP FASHION SARSAWA
           </span>
         </Link>
-
+        <Link to="/cart" className="block hover:text-[#C4A24B] md:hidden">
+          🛒
+          {cartCount > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 rounded-full">
+              {cartCount}
+            </span>
+          )}
+        </Link>
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-8 text-[#3E2C1C] font-medium">
           <Link to="/" className="hover:text-[#C4A24B] transition">
@@ -174,6 +194,16 @@ export default function Navbar() {
           <Link to="/contact" className="hover:text-[#C4A24B] transition">
             Contact
           </Link>
+
+          <Link to="/cart" className="block hover:text-[#C4A24B]">
+            🛒
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 rounded-full">
+                {cartCount}
+              </span>
+            )}
+          </Link>
+
         </div>
       </div>
 
@@ -277,7 +307,14 @@ export default function Navbar() {
 
 
           </div>
-
+          <Link to="/cart" className="block hover:text-[#C4A24B]">
+            Cart 🛒
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 rounded-full">
+                {cartCount}
+              </span>
+            )}
+          </Link>
           <Link
             to="/about"
             className="block hover:text-[#C4A24B]"

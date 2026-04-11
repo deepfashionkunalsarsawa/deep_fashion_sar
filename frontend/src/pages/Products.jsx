@@ -1,7 +1,8 @@
 import { useEffect, useState, useMemo } from "react";
 import Container from "../components/common/Container";
 import { getProducts } from "../services/productService";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+import { getCart } from "../utils/cart";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -125,7 +126,19 @@ export default function Products() {
   //   return filteredProducts.slice(start, end);
   // }, [filteredProducts, currentPage]);
 
+  const [cartCount, setCartCount] = useState(0);
 
+  useEffect(() => {
+    const updateCart = () => {
+      const cart = getCart();
+      setCartCount(cart.length);
+    };
+
+    updateCart();
+    window.addEventListener("storage", updateCart);
+
+    return () => window.removeEventListener("storage", updateCart);
+  }, []);
   return (
     <section className="bg-[#F5F1E8] min-h-screen pb-24">
       <Container>
@@ -147,7 +160,41 @@ export default function Products() {
             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[#8B6A2B] text-sm">
               🔍
             </span>
+
+            
+
           </div>
+          {/* 
+          <div className="flex items-center justify-between gap-4">
+
+            
+            <div className="relative flex-1 max-w-md">
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full border border-[#D8D2C4] bg-white rounded-full py-2.5 pl-4 pr-10 focus:outline-none shadow-sm text-sm"
+              />
+
+              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[#8B6A2B] text-sm">
+                🔍
+              </span>
+            </div>
+
+           
+            <Link to="/cart" className="relative text-xl">
+              🛒
+
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 rounded-full">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+
+          </div> */}
+
 
         </div>
         

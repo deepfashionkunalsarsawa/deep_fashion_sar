@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Container from "../components/common/Container";
 import { getProductById, getProducts } from "../services/productService";
+import { addToCart } from "../utils/cart";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -61,7 +62,25 @@ export default function ProductDetails() {
       alert("Something went wrong");
     }
   };
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      alert("Please select size");
+      return;
+    }
 
+    const item = {
+      id: product.id,
+      name: product.name,
+      price: finalPrice,
+      image: selectedImage,
+      size: selectedSize,
+      quantity: quantity,
+    };
+
+    addToCart(item);
+
+    alert("Added to cart ✅");
+  };
   const fetchRelatedProducts = async (currentProduct) => {
     try {
       const data = await getProducts();
@@ -314,7 +333,12 @@ Price: ₹${finalPrice}
             >
               Order on WhatsApp
             </button>
-
+            <button
+              onClick={handleAddToCart}
+              className="w-full md:w-auto bg-black text-white font-semibold py-3 px-8 rounded-full"
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
 
