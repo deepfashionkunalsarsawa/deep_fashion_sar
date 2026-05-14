@@ -307,7 +307,10 @@ function Hero({ navigate }) {
   );
 }
 
+
 function Categories({ navigate }) {
+  const scrollRef = useRef();
+
   const categories = [
     { name: "Sarees", image: "/categories/Sarees.jpg" },
     { name: "Designer Suits", image: "/categories/Designer Suits.jpg" },
@@ -317,39 +320,73 @@ function Categories({ navigate }) {
     { name: "New Arrivals", image: "/categories/New Arrivals.jpg" },
     { name: "Anarkali Frocksuits", image: "/categories/Anarkali Frocksuits.jpg" },
     { name: "Cord Sets", image: "/categories/Cord Sets.jpg" },
-
   ];
+
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const scrollAmount = 300;
+
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <section className="py-4 bg-white">
       <Container>
 
-        {/* Mobile Scroll + Desktop Grid */}
-        <div className="flex md:grid md:grid-cols-6 gap-3 overflow-x-auto md:overflow-visible no-scrollbar px-1">
+        <div className="relative">
 
-          {categories.map((cat, index) => (
-            <div
-              key={index}
-              onClick={() =>
-                navigate(`/products?category=${encodeURIComponent(cat.name)}`)
-              }
-              className="min-w-[90px] md:min-w-0 text-center cursor-pointer group flex-shrink-0"
-            >
-              {/* Circle Image */}
-              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-[#C4A24B] overflow-hidden bg-white shadow-md group-hover:scale-105 transition duration-300 mx-auto">
-                <img
-                  src={cat.image}
-                  alt={cat.name}
-                  className="w-full h-full object-cover"
-                />
+          {/* Left Button Desktop Only */}
+          <button
+            onClick={() => scroll("left")}
+            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white shadow-lg rounded-full items-center justify-center border hover:scale-105 transition"
+          >
+            ❮
+          </button>
+
+          {/* Categories Scroll */}
+          <div
+            ref={scrollRef}
+            
+            className="flex gap-2 lg:gap-12 overflow-x-auto no-scrollbar px-1 pb-2 scroll-smooth"
+          >
+            {categories.map((cat, index) => (
+              <div
+                key={index}
+                onClick={() =>
+                  navigate(
+                    `/products?category=${encodeURIComponent(cat.name)}`
+                  )
+                }
+                className="min-w-[95px] text-center cursor-pointer group flex-shrink-0"
+              >
+                {/* Image */}
+                <div className="w-20 h-20 md:w-28 md:h-28 rounded-full border-2 border-[#C4A24B] overflow-hidden bg-white shadow-md group-hover:scale-105 transition duration-300 mx-auto">
+                  <img
+                    src={cat.image}
+                    alt={cat.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Name */}
+                <p className="mt-2 text-xs md:text-sm font-medium text-[#3E2C1C] whitespace-nowrap">
+                  {cat.name}
+                </p>
               </div>
+            ))}
+          </div>
 
-              {/* Category Name */}
-              <p className="mt-2 text-xs md:text-sm font-medium text-[#3E2C1C] whitespace-nowrap">
-                {cat.name}
-              </p>
-            </div>
-          ))}
+          {/* Right Button Desktop Only */}
+          <button
+            onClick={() => scroll("right")}
+            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white shadow-lg rounded-full items-center justify-center border hover:scale-105 transition"
+          >
+            ❯
+          </button>
 
         </div>
 

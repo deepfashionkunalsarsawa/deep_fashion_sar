@@ -3,6 +3,8 @@ import Container from "../components/common/Container";
 import { getProducts } from "../services/productService";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { getCart } from "../utils/cart";
+import { useRef } from "react";
+
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -12,7 +14,16 @@ export default function Products() {
   const [searchTerm, setSearchTerm] = useState("");
   // const [currentPage, setCurrentPage] = useState(1);
   // const productsPerPage = 25;
+  const scrollRef = useRef();
 
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -300 : 300,
+        behavior: "smooth",
+      });
+    }
+  };
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -159,9 +170,9 @@ export default function Products() {
           </button>
 
           {/* Heading */}
-          <h1 className="text-xl md:text-2xl font-semibold text-primary">
+          {/* <h1 className="text-xl md:text-2xl font-semibold text-primary">
             Product
-          </h1>
+          </h1> */}
 
           {/* </div> */}
           {/* Smaller Search */}
@@ -217,7 +228,7 @@ export default function Products() {
 
 
         {/* CATEGORY SLIDER */}
-        <div className="flex gap-4 overflow-x-auto pb-5 no-scrollbar md:grid md:grid-cols-6">
+        {/* <div className="flex gap-4 overflow-x-auto pb-5 no-scrollbar md:grid md:grid-cols-6">
           {["Sarees", "Lehenga", "Designer Suits", "Party Wear", "Unstitched Suits", "Anarkali Frocksuits", "Cord Sets"].map((cat) => (
             <div
               key={cat}
@@ -247,8 +258,72 @@ export default function Products() {
               </p>
             </div>
           ))}
-        </div>
+        </div> */}
 
+        <div className="relative">
+
+          {/* Left Button */}
+          <button
+            onClick={() => scroll("left")}
+            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white shadow-lg rounded-full items-center justify-center border hover:scale-105 transition"
+          >
+            ❮
+          </button>
+
+          {/* Scroll Section */}
+          <div
+            ref={scrollRef}
+            className="flex gap-2 lg:gap-12 overflow-x-auto pb-5 no-scrollbar scroll-smooth px-1"
+             
+          >
+            {[
+              "Sarees",
+              "Lehenga",
+              "Designer Suits",
+              "Party Wear",
+              "Unstitched Suits",
+              "Anarkali Frocksuits",
+              "Cord Sets",
+            ].map((cat) => (
+              <div
+                key={cat}
+                onClick={() =>
+                  setCategoryFilter(
+                    categoryFilter === cat ? "" : cat
+                  )
+                }
+                className="flex flex-col items-center min-w-[75px] cursor-pointer flex-shrink-0"
+              >
+                <div
+                  className={`w-20 h-20 md:w-28 md:h-28 rounded-full border-2 ${
+                    categoryFilter === cat
+                      ? "border-[#8B6A2B]"
+                      : "border-[#D4AF37]"
+                  } overflow-hidden bg-white shadow-sm`}
+                >
+                  <img
+                    src={`/categories/${cat}.jpg`}
+                    alt={cat}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <p className="text-xs mt-2 text-[#3E2C1C] whitespace-nowrap">
+                  {cat}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Right Button */}
+          <button
+            onClick={() => scroll("right")}
+            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white shadow-lg rounded-full items-center justify-center border hover:scale-105 transition"
+          >
+            ❯
+          </button>
+
+        </div>
         {/* OCCASION + SORT FILTERS */}
         <div className="flex gap-3 mb-6">
           <select
