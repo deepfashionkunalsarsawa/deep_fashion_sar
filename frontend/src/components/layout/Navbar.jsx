@@ -209,6 +209,12 @@ export default function Navbar() {
               <div className="mt-3 ml-4 space-y-3 text-base text-[#5a4630]">
 
                 <Link 
+                  to="/products"
+                  className="block hover:text-[#C4A24B]"
+                >
+                  All
+                </Link>
+                <Link 
                   to="/products?category=Designer Suits" 
                   className="block hover:text-[#C4A24B]"
                 >
